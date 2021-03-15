@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import { Form, Input, Button, notification, Card } from 'antd';
 import axios from "axios";
@@ -9,9 +9,11 @@ import { setToken } from "store";
 
 export default function Login() {
     const { dispatch } = useAppContext();
+    const location = useLocation();
     const history = useHistory();
+    const [fieldErrors, setFieldErrors] = useState({});
 
-    const [fieldErrors, setFieldErrors] = useState({})
+    const { from: loginRedirectUrl } = location.state || { from: { pathname: "/" } };
 
     const onFinish = values => {
         async function fn() {
@@ -29,7 +31,8 @@ export default function Login() {
                     message: "로그인 성공",
                     icon: <SmileOutlined style={{ color: "#108ee9" }} />
                 })
-                // history.push("/accounts/login")  // TODO: 이동 주소
+
+                history.push(loginRedirectUrl);
             } catch (error) {
                 console.log(error)
                 if (error.response) {

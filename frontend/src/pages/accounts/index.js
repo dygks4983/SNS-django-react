@@ -1,13 +1,14 @@
 import React from "react";
-import {Route} from "react-router-dom";
+import { Route } from "react-router-dom";
 import Login from "./Login";
 import Profile from "./Profile";
 import Signup from "./Signup";
+import LoginRequiredRoute from "utils/LoginRequiredRoute";
 
-export default function Routes({ match }){
+export default function Routes({ match }) {
     return (
         <>
-            <Route path={match.url + "/profile"} component={Profile} />
+            <LoginRequiredRoute path={match.url + "/profile"} component={Profile} />
             <Route path={match.url + "/login"} component={Login} />
             <Route path={match.url + "/signup"} component={Signup} />
         </>
