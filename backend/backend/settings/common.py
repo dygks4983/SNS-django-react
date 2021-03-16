@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third apps
     'rest_framework',
+    'django_pydenticon',
     'corsheaders',
     # local apps
     'instagram',

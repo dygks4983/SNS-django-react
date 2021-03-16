@@ -30,6 +30,9 @@ class User(AbstractUser):
         help_text="48px * 48px 크기의 png/jpg 파일을 업로드해주세요.",
     )
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
     @property
     def name(self):
         return f"{self.first_name} {self.last_name}".strip()
